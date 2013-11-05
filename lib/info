@@ -1,0 +1,38 @@
+# SYNOPSIS:
+#
+# Gathers info about current system, creates environment variables for
+# use in conditional scripting
+#
+# --------------------------------------------
+# DETAILS
+# Presently, this sets the following ENV vars to one of the given values:
+#
+# * PLATFORM = whatever `uname -s` prints out, uppercased.
+# * DISTRO = one of { ARCH, DEBIAN, REDHAT, UNKNOWN }
+#
+# NB:
+# In particular the latter is a bit of a misnomer, it's really better stated as
+# being the package-manager of note for those systems. It operates entirely by 
+# checking to see if the package manager for that distro-family exists. Eventually
+# it would be ideal to have this have more detail, perhaps existing as some
+# structured format which some functions could deal with. 
+# 
+# I also imagine this information exists consistently somewhere else, but it's 
+# nice to have it all tied up in a bash script.
+
+# Gather platform information (OSX? Linux? etc)
+export PLATFORM="$(uname -s | tr a-z A-Z)"
+
+# Gather distro information for linux 
+if [ "$PLATFORM" = "LINUX" ] ; then
+  if which pacman &>/dev/null ; then
+    export DISTRO=ARCH
+  elif which apt-get &>/dev/null ; then
+    # figure out which debian clone it is, might be valuable to distinguish...
+    export DISTRO=DEBIAN
+  elif which yum &>/dev/null ; then
+    export DISTRO=REDHAT
+  else
+    export DISTRO=UNKOWN
+  fi
+fi
