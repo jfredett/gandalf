@@ -1,0 +1,39 @@
+#!/usr/bin/env bash -x
+
+
+## SYNOPSIS
+# Updates a wiki based on a directory in the main repo. Also updates a tracking
+# branch on your local repo
+#
+
+## DEPENDENCIES
+# git, git-subtree
+#
+
+## USAGE
+# git update-wiki [name-of-wiki-directory] [name-of-wiki-remote]
+#
+# The wiki-directory defaults to 'wiki'
+# The wiki-remote defaults to 'wiki'
+#
+
+## TODO
+# Someday, make the commands nicer, something like `--remote wiki --source notes`
+#
+
+function update_wiki_branch() {
+  local source_dir=$1
+  local branch_name=$2
+
+  git subtree --prefix $source_dir --branch $branch_name
+}
+
+function push_wiki() {
+  local branch_name=$1
+  local remote_name=$2
+
+  git push $remote_name $branch_name:master -f
+}
+
+update_wiki_branch ${1:-wiki} ${2:-wiki}
+push_wiki ${1:-wiki} ${2:-wiki}
