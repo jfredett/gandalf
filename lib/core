@@ -1,0 +1,10 @@
+# Core functions used by the bash script setup stuff
+
+# Takes a filepath and gets the canonical path to the containing directory.
+#
+# e.g. `directory $0` in a script will yield the directory of the script.
+#
+# useful for introspection
+directory() {
+  dirname $(readlink -f $1)
+}

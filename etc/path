@@ -1,0 +1,20 @@
+unset PATH
+
+# helper
+append_path() {
+  if [ "$PATH" ] ; then
+    export PATH="$PATH:$1"
+  else
+    export PATH=$1
+  fi
+}
+
+append_path /usr/local/sbin
+append_path /usr/local/bin
+append_path /usr/bin
+append_path /usr/bin/core_perl
+append_path $SCRIPT_HOME/bin  	# append ~/<this repo>/bin
+
+
+# cleanup
+unset append_path
