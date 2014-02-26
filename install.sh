@@ -12,18 +12,59 @@ die() {
   exit $2
 }
 
+execute() {
+  echo "Executing $1"
+  bash $@
+}
+
+
 ###
 
 fail_unless_exists readlink
 fail_unless "readlink -f $0 &>/dev/null" "readlink must support '-f'"
 
 fail_unless_exists dirname
+fail_unless_exists git
 
-################################################################################
-## install phase
+# install phase
 
-# write out rc/profile files.
+## Collect information
 
-cat <<EOF
-source $HOME/$(dirname $(readlink -f $0))/lib/core
-EOF
+ARGS=($@)
+while [ "$ARGS" ] ; do
+  curr=${ARGS[0]}
+  ARGS=(${ARGS[@]:1})
+
+  case $curr in
+    --git)
+        GIT_URL=${ARGS[0]}
+        ARGS=(${ARGS[@]:1})
+      ;;
+    --install)
+        INSTALL_DIR=${ARGS[0]}
+        ARGS=(${ARGS[@]:1})
+      ;;
+    *) echo "Bad Options" ; exit 2 ;;
+  esac
+done
+
+[ -z $INSTALL_DIR ] && INSTALL_DIR="/home/$USER/.gandalf"
+[ -z $GIT_URL ] && GIT_URL="git clone http://github.com/jfredett/gandalf.git"
+
+echo "Installing to $INSTALL_DIR"
+echo "Cloning from $GIT_URL"
+git clone $GIT_URL $INSTALL_DIR
+echo "Finished Cloning"
+
+## Relocate to installed directory
+cd $INSTALL_DIR
+
+for install_script in $INSTALL_DIR/etc/install.d/* ; do
+  if ! execute $install_script $INSTALL_DIR ; then
+    die "$install_script failed, exiting" $?
+  fi
+done
+
+## Finish
+echo "Finished installing gandalf"
+exit 0
