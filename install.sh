@@ -14,7 +14,7 @@ die() {
 
 execute() {
   echo "Executing $1"
-  bash $@
+  INSTALL_DIR=$INSTALL_DIR bash $@
 }
 
 
@@ -54,13 +54,12 @@ done
 echo "Installing to $INSTALL_DIR"
 echo "Cloning from $GIT_URL"
 git clone $GIT_URL $INSTALL_DIR
-echo "Finished Cloning"
 
 ## Relocate to installed directory
 cd $INSTALL_DIR
 
 for install_script in $INSTALL_DIR/etc/install.d/* ; do
-  if ! execute $install_script $INSTALL_DIR ; then
+  if ! execute $install_script ; then
     die "$install_script failed, exiting" $?
   fi
 done
