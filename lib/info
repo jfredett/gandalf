@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # SYNOPSIS:
 #
 # Gathers info about current system, creates environment variables for
