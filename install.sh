@@ -53,7 +53,10 @@ done
 
 echo "Installing to $INSTALL_DIR"
 echo "Cloning from $GIT_URL"
-git clone $GIT_URL $INSTALL_DIR
+if ! $GIT_URL $INSTALL_DIR ; then
+  echo "Failed to clone, exiting"
+  exit 4
+fi
 
 ## Relocate to installed directory
 cd $INSTALL_DIR
