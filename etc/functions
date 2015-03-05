@@ -1,0 +1,209 @@
+#!/bin/bash
+
+function each-dir {
+  for dir in * ; do
+    [ ! -d $dir ] && continue
+    echo "----> $dir"
+    pushd $dir 1>/dev/null
+    eval "$@"
+    popd 1>/dev/null
+  done
+}
+
+if [ $PLATFORM = "OSX" ] ; then
+  function lein() {
+    # because lein doesn't like the TERM iTerm2 seems to give it.
+    TERM=dumb command lein $@
+    return $!
+  }
+fi
+
+function set_color() {
+  color=$1; val=$2;
+  shift; shift;
+
+  case $color in
+    "RED")     printf "%s" "\[\033[0;31m\]$val\[\033[0m\]" ;;
+    "YELLOW")  printf "%s" "\[\033[0;33m\]$val\[\033[0m\]" ;;
+    "GREEN")   printf "%s" "\[\033[0;32m\]$val\[\033[0m\]" ;;
+    "LGTGRN")  printf "%s" "\[\033[1;32m\]$val\[\033[0m\]" ;;
+    "BLUE")    printf "%s" "\[\033[0;36m\]$val\[\033[0m\]" ;;
+    "BROWN")   printf "%s" "\[\033[0;33m\]$val\[\033[0m\]" ;;
+    "PURPLE")  printf "%s" "\[\033[0;35m\]$val\[\033[0m\]" ;;
+    *)         printf "%s" "$val" ;;
+  esac
+}
+
+function squish_spaces() {
+  echo "$(echo "$1" | sed -nE 's/\ +/ /pg')"
+}
+
+function fup() {
+  [ "$1" = "dup" ] && cp "$2" "$3" && return 0;
+}
+
+function line-count {
+  find "${1:-.}" -name "${2:-*.rb}" -exec cat {} \; | grep -vE '^\s*#' | grep -vE '^\s*$' | wc -l
+}
+
+function go {
+  git remote update -p
+  git rebase origin/master
+
+  if [ -e Gemfile ] ; then
+    echo 'detected bundler, running `bundle install`'
+    bundle
+  fi
+
+  if [ -e Rakefile ] ; then
+    echo 'detected rake, running default task'
+    if rake ; then
+      echo "Tests passed!"
+    else
+      echo "Oh Noes! FAIL"
+    fi
+  fi
+}
+
+function do-after {
+  sleep `echo "$1" | bc` && $2
+}
+
+function y {
+  [ $? = 0 ] && $@
+}
+
+function n {
+  [ $? = 0 ] || $@
+}
+
+function maildir {
+  local name="$1"
+  mkdir -p $1/{cur,new,tmp}
+}
+
+function cl {
+  /usr/bin/clear
+  if which tmux &>/dev/null ; then
+    tmux clear-history
+    tmux clear-history
+  fi
+}
+
+function mw {
+  if [ -z "$2" ] ; then
+    tmux move-window -t $1
+  else
+    tmux move-window -t $2 -s $1
+  fi
+}
+
+function rs {
+  tmux resize-pane -$1 $2
+}
+
+function gt {
+  tmux select-window -t $1
+}
+
+function sw {
+  #need defaulting
+  mw $1 9999;
+  mw $2 $1;
+  mw 9999 $2;
+}
+
+
+
+
+
+function ignore {
+  if [ -z "$1" ] ; then
+    cat .gitignore
+  else
+    if git status --porcelain | grep -vE '^[? ]' ; then
+      echo "There is staged work, please commit or reset it"
+      return 1
+    fi
+
+    echo "$1" >> .gitignore
+    git add .gitignore
+    git commit -S -m "ignore $1"
+  fi
+
+  return 0
+}
+
+
+function perg {
+  tac $2 | grep $1
+}
+
+
+function hitch {
+  command hitch "$@"
+  if [[ -s "$HOME/.hitch_export_authors" ]] ; then source "$HOME/.hitch_export_authors" ; fi
+}
+alias unhitch='hitch -u'
+# hitch
+
+
+
+function fucking_json_pp() {
+  curl $1 | node -e 'ε="";θ=process;β=θ.stdin;γ=JSON;β.on("data",function(τ){ε+=τ}),β.on("end",function(){θ.stdout.write(γ.stringify(γ.parse(ε),γ.χ,2))}),β.resume();'
+}
+
+function update_local_quill_content() {
+  local url="http://congruentsys:22tango@author.cds-onc.com/versions/most_recent.json"
+
+  curl "$url" | foreman run bundle exec rails runner 'Version.create! content_json: $stdin.read'
+}
+
+#function vim() {
+  #if [ $# -ne 0 ] ; then
+    #local args="--remote-silent $@"
+  #fi
+  #builtin command vim --servername ${DEFAULT_VIMSERVER:=$VIMSERVER} $args
+#}
+
+function migration {
+  # must be run from the rails root
+  [ ! -e 'db/migrate/' ] && { echo "You need to execute this from the rails root" ; return 1 ; }
+
+  # figure out if we're doing DM or AR
+  local orm=ActiveRecord
+  grep dm-migrations Gemfile.lock &>/dev/null && orm=DataMapper
+
+  local migration_name="$1"
+  local datestamp="$(date +'%Y%m%d%H%M%S')"
+  local file="./db/migrate/$datestamp""_$migration_name.rb"
+
+  touch $file
+  if [ "$orm" = "ActiveRecord" ] ; then
+    cat <<AR>$file
+class Migration_$datestamp < ActiveRecord::Migration
+  # $migration_name
+  def change
+
+  end
+end
+AR
+  else
+    cat <<DM>$file
+migration $datestamp, :$migration_name do
+  up do
+  end
+
+  down do
+  end
+end
+DM
+  fi
+
+  $EDITOR $file
+}
+
+
+function calc {
+  echo "scale=${PRECISION:-4}; $@" | bc
+}

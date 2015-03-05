@@ -1,0 +1,79 @@
+#!/bin/bash
+
+#alias to reload aliases... meta...
+if [ $PLATFORM = "OSX" ] ; then
+  alias reload="source $HOME/$RC_FILES ; cd ."
+elif [ $PLATFORM = "LINUX" ] ; then
+  alias reload="source $HOME/$RC_FILES ; cd ."
+fi
+alias edit-aliases="nvim $HOME/.bash/aliases && reload"
+alias edit-functions="nvim $HOME/.bash/functions && reload"
+
+#OSX Specific
+if [ $PLATFORM = "OSX" ] ; then
+  alias ls="gls --color=auto"
+  alias flush='dscacheutil -flushcache'
+fi
+
+if which ruby &>/dev/null ; then
+  alias clb='cl ; bundle '
+  alias clr='clb exec rake'
+  alias clc='clb exec pry'
+  alias clobber="clr db:drop:all db:create:all db:migrate db:test:prepare"
+  alias hammer="clobber"
+  alias clobbah="clobber"
+  alias pictures="railroady -b -M > doc/models.dot ; dot -Tsvg doc/models.dot > doc/models.svg ; open doc/models.svg"
+  alias heroku_keyswap="ssh-add -D ; ssh-add ~/.ssh/heroku"
+fi
+
+if [ "$LINUX" ] ; then
+  alias ls="ls --color=auto"
+
+  if which aura &>/dev/null ; then
+    alias pacman="sudo aura --noconfirm"
+  else
+    alias pacman="sudo pacman --noconfirm"
+  fi
+
+  if which aura &>/dev/null ; then
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+  fi
+fi
+
+if dirstack --version &>/dev/null ; then
+  alias jt="jump"
+  alias st='jump ; swap'
+fi
+
+if which git &>/dev/null ; then
+  alias pewpew="git reset --hard && git clean -f"
+  alias gru='git remote update -p'
+  alias grom='git rebase origin/master'
+  alias grum='git rebase upstream/master'
+  alias wip='git add -A . ; git ci -a -m "wip"'
+  alias unwip='git reset HEAD^'
+  alias reset!='git reset --hard HEAD'
+  alias gitkeep='touch .gitkeep'
+  alias gitx='git add -p'
+
+  if which hub &>/dev/null ; then
+    alias git=hub
+  fi
+fi
+
+#common stuff
+alias cd..='cd ..'
+alias vi=nvim
+alias vim=nvim
+alias psf="ps aux | grep"
+alias mdr=maildir
+alias exterminate="sudo kill -9"
+alias check_mail='cat /var/mail/jfredett'
+alias clear_mail='cat /dev/null > /var/mail/jfredett'
+
+alias fr='foreman run'
+
+if [ $PLATFORM = "OSX" ] ; then
+  alias virtualenv2='/usr/local/lib/python2.7/site-packages/virtualenv'
+fi

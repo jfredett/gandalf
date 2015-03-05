@@ -1,6 +1,7 @@
 [user]
-  name = Joe Fredette
-  email = jfredett@gmail.com
+	name = Joe Fredette
+	email = jfredett@gmail.com
+  signingkey = EEE8D41E
 
 [color]
   diff = auto
@@ -10,8 +11,9 @@
 
 [alias]
   st = status -s
-  ci = commit
-  ca = commit -a
+  ci = commit -S
+  ca = commit -Sa
+  merge = merge -S
   co = checkout
   w = whatchanged
   pm = push -u origin master
@@ -20,8 +22,10 @@
   cont = rebase --continue
   abort = rebase --abort
   skip = rebase --skip
-  gr="log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
-  patch= commit --amend --no-edit
+  gr="log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset) - %C(blue)Sig:%G?' --all"
+  patch= commit -S --amend --no-edit
+[commit]
+  gpgsign=true
 
 [core]
   excludesfile = /Users/jfredett/.gitignore_global
@@ -37,3 +41,5 @@
 
 [include]
   path = ~/.bash/github_gitconfig
+[diff]
+	algorithm = patience

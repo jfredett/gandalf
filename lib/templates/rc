@@ -1,3 +1,8 @@
 source $SCRIPT_HOME/lib/core
 
+require lib/info
+
 require etc/env
+require etc/aliases
+require etc/functions
+require etc/ps1
