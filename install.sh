@@ -30,44 +30,7 @@ fail_unless_exists git
 
 ## Collect information
 
-ARGS=($@)
-while [ "$ARGS" ] ; do
-  curr=${ARGS[0]}
-  ARGS=(${ARGS[@]:1})
-
-  echo "DEBUG: $curr"
-  case $curr in
-    --git)
-        GIT_URL=${ARGS[0]}
-        ARGS=(${ARGS[@]:1})
-      ;;
-    --install)
-        INSTALL_DIR=${ARGS[0]}
-        ARGS=(${ARGS[@]:1})
-      ;;
-    --skip-clone)
-        echo "DEBUG: skip clone triggered"
-        SKIP_CLONE="1"
-        echo "DEBUG: SKIP_CLONE is $SKIP_CLONE"
-        ARGS=(${ARGS[@]:1})
-      ;;
-    *) echo "Bad Options" ; exit 2 ;;
-  esac
-done
-
 [ -z $INSTALL_DIR ] && INSTALL_DIR="/home/$USER/.gandalf"
-[ -z $GIT_URL ] && GIT_URL="git clone http://github.com/jfredett/gandalf.git"
-
-echo "Installing to $INSTALL_DIR"
-if [ -z "$SKIP_CLONE" ] ; then
-  echo "Cloning from $GIT_URL"
-  if ! $GIT_URL $INSTALL_DIR ; then
-    echo "Failed to clone, exiting"
-    exit 4
-  fi
-else
-  echo "Skipping clone, using local checkout at $INSTALL_DIR"
-fi
 
 ## Relocate to installed directory
 cd $INSTALL_DIR
