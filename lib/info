@@ -17,9 +17,9 @@
 # being the package-manager of note for those systems. It operates entirely by 
 # checking to see if the package manager for that distro-family exists. Eventually
 # it would be ideal to have this have more detail, perhaps existing as some
-# structured format which some functions could deal with. 
-# 
-# I also imagine this information exists consistently somewhere else, but it's 
+# structured format which some functions could deal with.
+#
+# I also imagine this information exists consistently somewhere else, but it's
 # nice to have it all tied up in a bash script.
 
 # Gather platform information (OSX? Linux? etc)
@@ -30,11 +30,41 @@ if [ "$PLATFORM" = "LINUX" ] ; then
   if which pacman &>/dev/null ; then
     export DISTRO=ARCH
   elif which apt-get &>/dev/null ; then
-    # figure out which debian clone it is, might be valuable to distinguish...
-    export DISTRO=DEBIAN
+    if [[ $(uname -v) =~ Ubuntu ]] ; then
+      export DISTRO=UBUNTU
+    else
+      export DISTRO=DEBIAN
+    fi
   elif which yum &>/dev/null ; then
     export DISTRO=REDHAT
   else
-    export DISTRO=UNKOWN
+    export DISTRO=UNKNOWN
   fi
 fi
+
+
+# Calculat rc and profile file location
+case $PLATFORM in
+  LINUX)
+    case $DISTRO in
+      UBUNTU)
+          export RC_FILES=('.bashrc')
+          export PROFILE_FILES=('.profile')
+          ;;
+      DEBIAN)
+          export RC_FILES=('.bashrc')
+          export PROFILE_FILES=('.profile')
+          ;;
+        ARCH)
+          export RC_FILES=('.bashrc')
+          export PROFILE_FILES=('.bash_profile')
+          ;;
+          *) echo "Unsupported Distro" && exit 1;;
+    esac
+    ;;
+  OSX)
+      export RC_FILES=('.bash_rc')
+      export PROFILE_FILES=('.profile' '.bash_profile')
+    ;;
+  *) echo "Unknown platform" && exit 1 ;;
+esac
