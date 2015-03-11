@@ -1,0 +1,5 @@
+path::append /usr/local/bin
+path::append /usr/sbin
+
+path::append /home/$USER/bin
+path::append /home/$USER/.gandalf/bin

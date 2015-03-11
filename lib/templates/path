@@ -1,0 +1,11 @@
+require lib/path_functions
+
+path::new /usr/bin
+
+require etc/path/default
+require etc/path/$PLATFORM/default
+require etc/path/$PLATFORM/$DISTRO
+
+require_tree etc/path/spec.d
+
+path::finish

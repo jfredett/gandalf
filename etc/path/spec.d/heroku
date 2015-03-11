@@ -1,0 +1,3 @@
+if exists heroku ; then
+  path::append /usr/local/heroku/bin
+fi
