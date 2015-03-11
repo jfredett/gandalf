@@ -24,3 +24,9 @@ require_tree() {
     done
   fi
 }
+
+DEBUGP() {
+  if [ -z $DEBUG ] ; then
+    echo "DEBUG: $@"
+  fi
+} >&2
