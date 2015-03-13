@@ -1,5 +1,5 @@
 require etc/alias.d/default
 require etc/alias.d/$PLATFORM/default
-require etc/alias.d/$PLATFORM/$DISTRO
+require etc/alias.d/$PLATFORM/$DISTRO -f
 
 require_tree etc/alias.d/spec.d

@@ -4,7 +4,7 @@ path::new /usr/bin
 
 require etc/path.d/default
 require etc/path.d/$PLATFORM/default
-require etc/path.d/$PLATFORM/$DISTRO
+require etc/path.d/$PLATFORM/$DISTRO -f
 
 require_tree etc/path.d/spec.d
 
