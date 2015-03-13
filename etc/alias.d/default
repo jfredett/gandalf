@@ -1,0 +1,8 @@
+alias cd..='cd ..'
+alias vi=$EDITOR
+alias vim=$EDITOR
+alias psf="ps aux | grep"
+
+alias reload="source $HOME/$RC_FILES ; cd ."
+alias edit-aliases="$EDITOR $HOME/.bash/aliases && reload"
+alias edit-functions="$EDITOR $HOME/.bash/functions && reload"

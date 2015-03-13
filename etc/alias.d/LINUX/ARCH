@@ -1,0 +1,12 @@
+# bake in sudo for aura/pacman depending on whats installed
+if exists aura ; then
+  alias pacman="sudo aura --noconfirm"
+else
+  alias pacman="sudo pacman --noconfirm"
+fi
+
+# set up pbcopy/pbpaste for an X environment
+if exists xsel ; then
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
+fi
