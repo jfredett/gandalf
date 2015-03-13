@@ -1,0 +1,3 @@
+#presume the current path is a go-path, other go paths can be
+# added as needed by projects.
+export GOPATH='.'

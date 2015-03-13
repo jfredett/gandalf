@@ -1,0 +1,3 @@
+if [ $PLATFORM = "OSX" ] ; then
+  export HOMEBREW_GITHUB_API_TOKEN=`cat $HOME/.bash/homebrew-git-token`
+fi
