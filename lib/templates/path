@@ -2,10 +2,10 @@ require lib/path_functions
 
 path::new /usr/bin
 
-require etc/path/default
-require etc/path/$PLATFORM/default
-require etc/path/$PLATFORM/$DISTRO
+require etc/path.d/default
+require etc/path.d/$PLATFORM/default
+require etc/path.d/$PLATFORM/$DISTRO
 
-require_tree etc/path/spec.d
+require_tree etc/path.d/spec.d
 
 path::finish
