@@ -1,0 +1,5 @@
+function lein() {
+  # because lein doesn't like the TERM iTerm2 seems to give it.
+  TERM=dumb command lein $@
+  return $!
+}

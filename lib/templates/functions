@@ -1,0 +1,5 @@
+require etc/function.d/default
+require etc/function.d/$PLATFORM/default
+require etc/function.d/$PLATFORM/$DISTRO
+
+require_tree etc/function.d/spec.d
