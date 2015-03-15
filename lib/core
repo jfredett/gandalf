@@ -3,7 +3,7 @@
 # determines whether the given argument is a name that exists on the PATH,
 # or a file that exists at the fully specified location.
 exists() {
-  [ which "$1" &>/dev/null ] || [ -e "$1" ]
+  which "$1" &>/dev/null || [ -e "$1" ]
 }
 
 require() {
