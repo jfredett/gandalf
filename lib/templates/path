@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 require lib/path_functions
 
 path::new /usr/bin
