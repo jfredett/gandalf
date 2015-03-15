@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+require etc/function.d/default
+require etc/function.d/$PLATFORM/default
+require etc/function.d/$PLATFORM/$DISTRO -f
+
+require_tree etc/function.d/spec.d

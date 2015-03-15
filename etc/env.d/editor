@@ -1,2 +1,2 @@
-export EDITOR='vim'
-export VIM_PATH="$HOME/.vim"
+#!/usr/bin/env bash
+export EDITOR='nvim'

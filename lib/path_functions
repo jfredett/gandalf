@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# TODO: make this build in a file in /tmp, avoiding duplication along the way,
+# then compile that file to the final export that's done only in path::finish,
+# ideally that can be cached and added as a check in the opening part of the
+# path template, so we don't recalculate it if we don't have too.
+
+path::new() {
+  export PATH="$1"
+}
+
+path::append() {
+  export PATH="$PATH:$1"
+}
+
+path::prepend() {
+  export PATH="$1:$PATH"
+}
+
+# Removes all these function definitions
+path::finish() {
+  for f in $(typeset -F | grep path:: | cut -c 12-) ; do
+    unset -f $f
+  done
+}
+
+

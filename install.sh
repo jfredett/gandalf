@@ -1,4 +1,7 @@
+#!/usr/bin/env bash
+
 # configure phase
+
 
 fail_unless_exists() {
   which $1 &> /dev/null || die "missing executable $1" 1

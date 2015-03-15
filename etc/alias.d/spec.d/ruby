@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if exists ruby ; then
+  if ! type cl &>/dev/null ; then
+    alias cl='clear'
+  fi
+
+  alias clb='cl ; bundle '
+  alias clr='clb exec rake'
+  alias clc='clb exec pry'
+fi

@@ -1,1 +1,2 @@
-source $HOME/$RC_FILES
+#!/usr/bin/env bash
+source $SCRIPT_HOME/lib/templates/rc

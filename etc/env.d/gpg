@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+export GPG_SETTINGS_FILE="$SCRIPT_HOME/var/gpg_settings"
+
+if [ -f "$GPG_SETTINGS_FILE" ] ; then
+  source "$GPG_SETTINGS_FILE"
+  # For SSH support
+  export GPG_AGENT_INFO
+  export SSH_AUTH_SOCK
+else
+  gpg-agent --daemon --enable-ssh-support \
+    --write-env-file "$GPG_SETTINGS_FILE" &>/dev/null
+fi

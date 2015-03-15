@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+require lib/path_functions
+
+path::new /usr/bin
+
+require etc/path.d/default
+require etc/path.d/$PLATFORM/default
+require etc/path.d/$PLATFORM/$DISTRO -f
+
+require_tree etc/path.d/spec.d
+
+path::finish

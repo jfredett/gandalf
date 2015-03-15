@@ -1,0 +1,37 @@
+function cl {
+  /usr/bin/clear
+
+  if exists tmux ; then
+    # If you only run it once, it doesn't actually remove the history, just
+    # hides it
+    tmux clear-history
+    tmux clear-history
+  fi
+}
+
+if exists tmux ; then
+
+  function mw {
+    if [ -z "$2" ] ; then
+      tmux move-window -t $1
+    else
+      tmux move-window -t $2 -s $1
+    fi
+  }
+
+  function rs {
+    tmux resize-pane -$1 $2
+  }
+
+  function gt {
+    tmux select-window -t $1
+  }
+
+  function sw {
+    #need defaulting
+    mw $1 9999;
+    mw $2 $1;
+    mw 9999 $2;
+  }
+
+fi

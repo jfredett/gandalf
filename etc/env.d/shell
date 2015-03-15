@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [ $PLATFORM = "LINUX" -a $DISTRO = "DEBIAN" ] ; then
+  export SHELL=/bin/bash
+elif [ $PLATFORM = "OSX" ] ; then
+  export SHELL=/usr/local/bin/bash
+fi
+
+export HISTSIZE=999999
+export HISTFILESIZE=999999
+
+export NLS_LANG="AMERICAN_AMERICA.UTF8"
+
+export LS_COLORS='di=01;36'

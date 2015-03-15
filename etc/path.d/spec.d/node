@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+if exists npm ; then
+  path::append /usr/local/lib/node_modules
+  path::append /usr/local/share/npm/bin
+fi

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if [ $PLATFORM = "LINUX" -a $DISTRO = "DEBIAN" ] ; then
+  export TERM="xterm-256color"
+fi

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if exists git ; then
+  if exists which hub ; then
+    alias git=hub
+  fi
+
+  alias gru='git remote update -p'
+  alias grom='git rebase origin/master'
+
+  alias wip='git add -A . ; git ci -a -m "wip"'
+  alias unwip='git reset HEAD^'
+
+  alias gitx='git add -p'
+
+fi

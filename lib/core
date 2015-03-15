@@ -1,5 +1,32 @@
 #!/usr/bin/env bash
 
-require() {
-  source $SCRIPT_HOME/$1
+# determines whether the given argument is a name that exists on the PATH,
+# or a file that exists at the fully specified location.
+exists() {
+  which "$1" &>/dev/null || [ -e "$1" ]
 }
+
+require() {
+  if exists $SCRIPT_HOME/$1 ; then
+    source $SCRIPT_HOME/$1
+  else
+    if [ "$2" != "-f" ] ; then
+      echo "Could not source script at $SCRIPT_HOME/$1, exiting."
+      exit 64
+    fi
+  fi
+}
+
+require_tree() {
+  if exists $SCRIPT_HOME/$1 ; then
+    for file in $SCRIPT_HOME/$1/* ; do
+      [ -f $file ] && source $file
+    done
+  fi
+}
+
+DEBUGP() {
+  if [ -z $DEBUG ] ; then
+    echo "DEBUG: $@"
+  fi
+} >&2

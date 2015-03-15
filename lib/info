@@ -40,10 +40,12 @@ if [ "$PLATFORM" = "LINUX" ] ; then
   else
     export DISTRO=UNKNOWN
   fi
+elif [ "$PLATFORM" = "DARWIN" ] ; then
+  export PLATFORM="OSX"
+  export DISTRO="$(sw_vers -productVersion)"
 fi
 
-
-# Calculat rc and profile file location
+# Calculate rc and profile file location
 case $PLATFORM in
   LINUX)
     case $DISTRO in
