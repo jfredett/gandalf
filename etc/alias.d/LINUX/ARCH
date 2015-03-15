@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # bake in sudo for aura/pacman depending on whats installed
 if exists aura ; then
   alias pacman="sudo aura --noconfirm"

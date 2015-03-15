@@ -1,2 +1,4 @@
+#!/usr/bin/env bash
+
 alias ls="gls --color=auto"
 alias flush='dscacheutil -flushcache'

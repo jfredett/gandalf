@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if exists git ; then
   if exists which hub ; then
     alias git=hub

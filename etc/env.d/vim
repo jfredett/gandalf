@@ -1,1 +1,3 @@
+#!/usr/bin/env bash
+
 export DEFAULT_VIMSERVER='vim_server'

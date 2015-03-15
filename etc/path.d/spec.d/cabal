@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if exists cabal ; then
   path::append $HOME/.cabal/bin
   path::append .cabal-sandbox/bin

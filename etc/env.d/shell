@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if [ $PLATFORM = "LINUX" -a $DISTRO = "DEBIAN" ] ; then
   export SHELL=/bin/bash
 elif [ $PLATFORM = "OSX" ] ; then

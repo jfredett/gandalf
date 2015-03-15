@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 path::append /bin
 path::append /sbin
 path::append /usr/bin

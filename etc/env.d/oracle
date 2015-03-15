@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if [ $PLATFORM = "LINUX" ] ; then
   export LD_LIBRARY_PATH="$HOME/oracle/instantclient_11_2/"
 elif [ $PLATFORM = "OSX" ] ; then

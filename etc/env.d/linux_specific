@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if [ $PLATFORM = "LINUX" ] ; then
   xset -b &>/dev/null # should only happen in X
   setterm -blength 0 &>/dev/null #should happen in console-only mode

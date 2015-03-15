@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #
 # large chunks of this are lovingly lifted from elsewhere. much from the ps1_functions in

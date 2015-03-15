@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if exists ruby ; then
   if ! type cl &>/dev/null ; then
     alias cl='clear'
