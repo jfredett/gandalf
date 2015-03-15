@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if exists git ; then
-  if exists which hub ; then
+  if exists hub ; then
     alias git=hub
   fi
 
