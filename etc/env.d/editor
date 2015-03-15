@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
 export EDITOR='nvim'
-export VIM_PATH="$HOME/.vim"
