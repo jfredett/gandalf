@@ -1,0 +1,12 @@
+# Why is this directory here?
+
+Everything in this directory is gitignored, so you can place stuff like secret
+API keys, etc here w/o having to worry about accidentally uploading them.
+Distributing these to be in sync across machines is not something Gandalf tries
+to solve, though you might try something like Bittorrent sync to do it.
+
+## Examples of stuff that might go here
+
+* AWS Secret Keys
+* Homebrew token
+* Github token
