@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+export HOMEBREW_GITHUB_API_TOKEN=`cat $SCRIPT_HOME/etc/secret.d/homebrew-git-token`
+export SHELL=/usr/local/bin/bash
+
+if [ -d "$HOME/oracle" ] ; then
+  export LD_LIBRARY_PATH="$HOME/oracle/instantclient_11_2/"
+fi

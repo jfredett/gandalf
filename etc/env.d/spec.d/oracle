@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+if [ -d "$HOME/oracle" ] ; then
+  export SQLPATH="$HOME/oracle/instantclient_11_2"
+  export TNS_ADMIN="$SQLPATH"
+fi

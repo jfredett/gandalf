@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ -d "$HOME/oracle" ] ; then
+  export LD_LIBRARY_PATH="$HOME/oracle/instantclient_11_2/"
+fi
+
+xset -b &>/dev/null # should only happen in X
+setterm -blength 0 &>/dev/null #should happen in console-only mode

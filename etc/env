@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-require_tree etc/env.d
-require_tree var/env

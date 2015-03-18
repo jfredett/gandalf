@@ -4,5 +4,4 @@ source $SCRIPT_HOME/lib/core
 
 require lib/info
 
-require etc/env
-require etc/ps1
+require var/env_loader

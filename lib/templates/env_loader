@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Load the core environment, setting up environment variables.
+require etc/env.d/default
+require etc/env.d/$PLATFORM/default
+require etc/env.d/$PLATFORM/$DISTRO -f
+
+require_tree etc/env.d/spec.d
+
+# Load the 'compiled' PATH, functions, and alias files.
+require_tree var/env
+
+# Load the PS1 calculation script.
+require etc/ps1

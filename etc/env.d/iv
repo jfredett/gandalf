@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-export IV_CONFIG_FILE="$HOME/.bash/iv_config"
