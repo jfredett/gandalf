@@ -1,0 +1,5 @@
+alias push='dirstack push'
+alias pop='dirstack pop'
+alias jt='dirstack jump'
+alias burn='dirstack burn'
+alias swap='dirstack swap'
