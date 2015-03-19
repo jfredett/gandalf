@@ -1,0 +1,56 @@
+idea for ps1 generation.
+
+every function that wants to provide a PS1 component specifies the following
+'methods' by defining functions like:
+
+foo::ps1_XXX() {
+
+}
+
+where XXX is one of:
+
+* content - required - the function to call to get the content for this function
+* position - optional - a two-digit string of numbers which specifies it's
+  desired sort position.
+* color - optional - one of the colors as definied in the `set_color` function
+* cacheable - optional - default 1 - true / false if this ps1 can be cached
+  after firing once. Will not be uncached till a `reload`.
+
+Then the PS1 runs like an installer in install.d, creating a var file with a
+single command compiled down to load as the PROMPT_COMMAND
+
+so we'd have something like:
+
+    fob::ps1_content() { echo "--- " ; }
+    fob::ps1_position() { echo "00" ; }
+
+    clock::ps1_content() { date +%l:%M ; }
+    clock::ps1_position() { echo "01" ; }
+    clock::ps1_color() { echo GREEN ; }
+
+    hostname::ps1_content() { hostname ; }
+    hostname::ps1_color() { echo WHITE ; }
+    hostname::ps1_cacheable() { true ; }
+    hostname::ps1_position() { echo 10 ; }
+
+
+Then the `10-ps1.sh` script would be something like:
+
+    typeset -F | grep "::ps1_" | cut everything but the function name | sort | uniq
+    for each above $function, pile into a list of pairs:
+      if $function::cacheable ; then
+        # note the double quotes on the latter element, meaning this gets
+        # interpreted now, not later
+        [$function::ps1_position, "($(set_color $function::ps1_color $function::ps1_content))"]
+      else
+        # note the single quotes, meaning the literal function to run will be
+        # copied into the PROMPT_COMMAND
+        [$function::ps1_position, '($(set_color $function::ps1_color $function::ps1_content))']
+      fi
+
+      sort by first element, strip the fist element,
+      write file to export into PROMPT_COMMAND, done.
+
+
+
+
