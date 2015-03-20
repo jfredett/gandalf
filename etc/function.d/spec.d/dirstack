@@ -16,3 +16,8 @@ dirstack() {
     *) dirstack_driver $@ ;;
   esac
 }
+
+dirstack::ps1_color()     { echo "-c blue" ; }
+dirstack::ps1_position()  { echo 99 ; } # far right
+dirstack::ps1_content()   { dirstack nonempty? && echo "$(dirstack peek):$(dirstack size)" ; }
+dirstack::ps1_cacheable() { false ; }
