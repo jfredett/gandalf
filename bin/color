@@ -78,5 +78,6 @@ done
 # Default quality to none, add `;`
 true ${quality:="${QUALITY[none]};"}
 
-read line
-echo -ne "\e[${quality}${fg}${bg}m$line\e[m"
+while read line ; do
+  echo -e "\e[${quality}${fg}${bg}m$line\e[m"
+done
