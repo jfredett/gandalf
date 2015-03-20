@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+read line
+[ -z "$line" ] && exit 0
+
+echo -n '('
+echo -n "$line"
+while read line ; do
+  echo -n "$line"
+done
+echo -n ')'

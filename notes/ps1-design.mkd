@@ -1,3 +1,49 @@
+
+PROBLEM:
+
+this only works if the function is loaded into the shell directly, not if it's a
+script. Perhaps a `has_ps1?` call? Then how do we know which commands to look
+at?
+
+Maybe better is a PROMPT_COMPONENTS variable which is an array of functions to do
+the below against. Then it'd be:
+
+    declare -a prompt_arr
+    for component in $PROMPT_COMPONENTS ; do
+      if [ "${prompt_arr[$component::ps1_position]}" ] ; then
+        prefix="${prompt_arr[$component::ps1_position]} "
+      else
+        prefix=""
+      fi
+
+      if $component::ps1_cacheable ; then
+        # note double quotes here
+        content="($(set_color $(component::ps1_color) $(component::ps1_content)))"
+      else
+        # note single quotes here
+        content='$(set_color $(component::ps1_color) $(component::ps1_content))'
+      fi
+
+      prompt_arr[$component::ps1_position]='$prefix$content'
+
+      # this may be superstitious
+      unset prefix
+      unset content
+    done
+
+    first_elt = ${prompt_arr[0]} ; shift $prompt_arr
+    prompt_cmd="$first_elt"
+    for elt in $prompt_arr ; do
+      prompt_cmd="$prompt_cmd $elt"
+    done
+    prompt_cmd="$prompt_cmd\n\$PROMPT_FOB"
+
+    echo 'export PROMPT_COMMAND=$prompt_cmd' > $SCRIPT_HOME/var/ps1
+
+give or take.
+
+----
+
 idea for ps1 generation.
 
 every function that wants to provide a PS1 component specifies the following

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+PROMPT_COMPONENTS=(dirstack time-ps1)
+export PROMPT_COMPONENTS
+
+export PROMPT_FOB="≈≈≈"

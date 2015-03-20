@@ -1,0 +1,4 @@
+time-ps1::ps1_color()     { echo "-c green -u" ; }
+time-ps1::ps1_position()  { echo 0 ; } # far left
+time-ps1::ps1_content()   { echo $(date +%l:%M) ; }
+time-ps1::ps1_cacheable() { false ; }

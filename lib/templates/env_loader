@@ -11,4 +11,4 @@ require_tree etc/env.d/spec.d
 require_tree var/env
 
 # Load the PS1 calculation script.
-require etc/ps1
+require var/ps1
