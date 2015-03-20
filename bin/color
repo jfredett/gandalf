@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+
+declare -A QUALITY
+declare -A FORECOLOR
+declare -A BACKCOLOR
+
+QUALITY[none]=00
+QUALITY[bold]=01
+QUALITY[underscore]=04
+QUALITY[blink]=05
+QUALITY[reverse]=07
+QUALITY[concealed]=08
+
+FORECOLOR[black]=30
+FORECOLOR[red]=31
+FORECOLOR[green]=32
+FORECOLOR[yellow]=33
+FORECOLOR[blue]=34
+FORECOLOR[magenta]=35
+FORECOLOR[cyan]=36
+FORECOLOR[white]=37
+
+BACKCOLOR[black]=40
+BACKCOLOR[red]=41
+BACKCOLOR[green]=42
+BACKCOLOR[yellow]=43
+BACKCOLOR[blue]=44
+BACKCOLOR[magenta]=45
+BACKCOLOR[cyan]=46
+BACKCOLOR[white]=47
+
+while getopts ":Burc:b:" opt $@ ; do
+  case $opt in
+    B)
+      if [ -z $quality ] ; then
+        quality=${QUALITY[bold]}
+      else
+        echo "Cannot specify multiple qualities (bold+underline, etc)" >&2
+        exit 4
+      fi
+      ;;
+    u)
+      if [ -z $quality ] ; then
+        quality=${QUALITY[underline]}
+      else
+        echo "Cannot specify multiple qualities (bold+underline, etc)" >&2
+        exit 4
+      fi
+      ;;
+    r)
+      if [ -z $quality ] ; then
+        quality=${QUALITY[reverse]}
+      else
+        echo "Cannot specify multiple qualities (bold+underline, etc)" >&2
+        exit 4
+      fi
+      ;;
+    c)
+      fg=${FORECOLOR[$OPTARG]}
+      ;;
+    b)
+      bg=${BACKCOLOR[$OPTARG]}
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 2
+      ;;
+  esac
+done
+
+echo -ne "\e[$quality;${fg};${bg}m"
+read line ; echo -n $line
+echo -ne "\e[m"
