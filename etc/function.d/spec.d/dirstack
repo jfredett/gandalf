@@ -2,7 +2,7 @@
 
 # We need this so we can alter the state of the parent shell, this acts as a
 # wrapper around the underlying script.
-function dirstack() {
+dirstack() {
   case $1 in
     jump)
       if dirstack_driver peek ; then
