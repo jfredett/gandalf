@@ -54,6 +54,7 @@ dirstack::burn() {
 }
 
 dirstack::size() {
+  [ -f "$DIRSTACK_STACKFILE" ] || echo 0
   local out="$(wc -l $DIRSTACK_STACKFILE)"
   echo ${out%%$DIRSTACK_STACKFILE}
 }
