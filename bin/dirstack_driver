@@ -28,6 +28,9 @@
 # yet unset. Equivalent to ruby's `foo ||= 123`
 true ${DIRSTACK_STACKFILE:="$SCRIPT_HOME/var/dirstack"}
 
+# ensures it exists if it was removed for whatever reason
+touch $DIRSTACK_STACKFILE
+
 # Pull in the gandalf tooling
 source $SCRIPT_HOME/lib/core
 # Pull in the function component
@@ -83,8 +86,6 @@ dirstack::peek() {
 
 dirstack::show() {
   if exists tac ; then
-    # ensures it exists if it was removed for whatever reason
-    touch $DIRSTACK_STACKFILE
     echo "-------- DIRECTORY STACK --------"
     tac $DIRSTACK_STACKFILE
     echo "---------------------------------"
