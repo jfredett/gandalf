@@ -1,0 +1,4 @@
+path-ps1::ps1_color()     { echo ; }
+path-ps1::ps1_position()  { echo 1 ; } # far left
+path-ps1::ps1_content()   { echo -n "${PWD#$(echo "$PWD" | xargs dirname | xargs dirname)/}" ; }
+path-ps1::ps1_cacheable() { false ; }
