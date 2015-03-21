@@ -3,7 +3,7 @@
 source $SCRIPT_HOME/lib/core
 
 if ! exists git ; then
-  echo "Requires git to be install"
+  echo "Requires git to be installed"
   return 1
 fi
 
@@ -63,7 +63,26 @@ git-spy::status-deleted?() {
 }
 
 git-spy::help() {
-  echo "help goes here"
+  cat <<-HERE
+git-spy - a set of scripts which give you information about a git repo
+
+usage: git-spy <command>
+   or: git spy <command>
+
+commands:
+
+  commit-sha        | a short version of the current SHA of HEAD
+  branch-count      | number of current branches
+  branch-name       | name of the current branch
+  author-name       | first name of the author of the current commit
+  author-email      | email of the author of the current commit
+  present?          | returns 0 if the current directory is a git repo, nonzero otherwise
+  absent?           | returns 0 if the current directory is not a git repo, nonzero otherwise
+  status-unindexed? | 'U' if there are any unindexed files, '' otherwise
+  status-modified?  | 'M' if there are any unindexed files, '' otherwise
+  status-deleted?   | 'D' if there are any unindexed files, '' otherwise
+  help              | print this message
+HERE
 }
 
 git-spy::${1:-help}
