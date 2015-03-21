@@ -19,7 +19,12 @@ for component in ${PROMPT_COMPONENTS[*]} ; do
     prefix=""
   fi
 
-  cmd="$component::ps1_content | color `$component::ps1_color` | paren_wrap"
+  color_args="$($component::ps1_color)"
+  if [ -z "$color_args" ] ; then
+    cmd="$component::ps1_content | paren_wrap"
+  else
+    cmd="$component::ps1_content | color `$component::ps1_color` | paren_wrap"
+  fi
 
   if $component::ps1_cacheable ; then
     content="$($cmd)"
