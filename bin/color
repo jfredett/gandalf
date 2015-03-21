@@ -42,7 +42,7 @@ while getopts ":Burc:b:" opt $@ ; do
       ;;
     u)
       if [ -z $quality ] ; then
-        quality=${QUALITY[underline]}
+        quality=${QUALITY[underscore]}
       else
         echo "Cannot specify multiple qualities (bold+underline, etc)" >&2
         exit 4
