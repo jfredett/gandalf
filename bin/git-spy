@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+source $SCRIPT_HOME/lib/core
+
+if ! exists git ; then
+  echo "Requires git to be install"
+  return 1
+fi
+
+git-spy::commit-sha() {
+  local sha=$(git rev-parse --short HEAD 2> /dev/null)
+  echo ${sha:-headless}
+}
+
+git-spy::commit-type() {
+  local log=$(git log -1 2> /dev/null)
+}
+
+git-spy::branch-count() {
+  git branch | wc -l
+}
+
+git-spy::branch-name() {
+  local val=$(git symbolic-ref -q HEAD 2>/dev/null)
+  val=${val##*/}
+  echo ${val:-none}
+}
+
+git-spy::author-name() {
+  # '%an' = author name log formatter
+  local name=$(git log -1 --pretty=format:%an)
+  name=${name%% *}
+  echo ${name:-Unknown}
+}
+
+git-spy::author-email() {
+  # '%ae' = author email log formatter
+  git log -1 --pretty=format:%ae
+}
+
+git-spy::present?() {
+  [ -d '.git' ]
+}
+
+git-spy::absent?() {
+  ! git-spy present?
+}
+
+git-spy::_status() {
+  git status --porcelain | grep "$1" &> /dev/null
+}
+
+git-spy::status-unindexed?() {
+  git-spy::_status '^??' && echo 'U'
+}
+
+git-spy::status-modified?() {
+  git-spy::_status '^ M' && echo 'M'
+}
+
+git-spy::status-deleted?() {
+  git-spy::_status '^ D' && echo 'D'
+}
+
+git-spy::help() {
+  echo "help goes here"
+}
+
+git-spy::${1:-help}
