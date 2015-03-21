@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Removes doubled spaces from input
+while read line ; do
+  echo "$line" | sed -nE 's/\ +/ /pg'
+done
