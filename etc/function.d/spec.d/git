@@ -14,3 +14,30 @@ function ignore {
 
   return 0
 }
+
+
+git-spy::ps1_color() { echo ; }
+git-spy::ps1_position() { echo 10 ; }
+git-spy::ps1_content() {
+  git-spy absent? && return
+  local branch="$(git-spy branch-name)"
+  case $branch in
+    master) branch="$(echo $branch | color -c red -u)"    ;;
+       wip) branch="$(echo $branch | color -c blue -u)"   ;;
+         *) branch="$(echo $branch | color -c yellow -u)" ;;
+  esac
+
+  local commit="$(git-spy commit-sha | color -c magenta)"
+
+  local author="$(git-spy author-name)"
+  if [ $author = "Joe" ] ; then
+    author="$(echo $author | color -c green -B)"
+  else
+    author="$(echo $author | color -c blue)"
+  fi
+
+  local status="$(git-spy status-unindexed? | color -c yellow)$(git-spy status-modified? | color -c green)$(git-spy status-deleted? | color -c red)"
+
+  echo -ne "$branch:$commit:$author $status"
+}
+git-spy::ps1_cacheable() { false ; }

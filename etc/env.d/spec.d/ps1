@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROMPT_COMPONENTS=(dirstack time-ps1)
+PROMPT_COMPONENTS=(dirstack time-ps1 git-spy)
 export PROMPT_COMPONENTS
 
 export PROMPT_FOB="≈≈≈"
