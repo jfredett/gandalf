@@ -2,3 +2,4 @@
 .vagrant
 var/
 etc/secret.d/*
+.DS_Store
