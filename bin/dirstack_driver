@@ -50,7 +50,7 @@ dirstack::fail() {
 
 dirstack::burn() {
   dirstack empty? && dirstack fail 2 "Stack too small"
-  sed '$d' $DIRSTACK_STACKFILE | tee $DIRSTACK_STACKFILE
+  sed -i -e '$d' $DIRSTACK_STACKFILE
 }
 
 dirstack::size() {
