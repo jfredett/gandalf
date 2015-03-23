@@ -1,0 +1,18 @@
+chruby() {
+  echo " * test"
+}
+#if exists chruby ; then
+
+ruby-ps1::ps1_color()     { echo ; }
+ruby-ps1::ps1_position()  { echo 10 ; } # far left
+ruby-ps1::ps1_content()   {
+  local ruby="$(chruby | grep '*')"
+  if [ -z "$ruby" ] ; then
+    echo system | color -c red
+  else
+    echo ${ruby##*\* } | color -c magenta
+  fi
+}
+ruby-ps1::ps1_cacheable() { false ; }
+
+#fi
