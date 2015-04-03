@@ -1,0 +1,6 @@
+#/usr/bin/env bash
+
+read line
+if [[ ! "$line" =~ ^\w*$ ]] ; then
+  echo "$line"
+fi
