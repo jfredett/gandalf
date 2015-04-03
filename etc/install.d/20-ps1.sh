@@ -13,10 +13,11 @@ declare -a prompt_arr
 
 for component in ${PROMPT_COMPONENTS[*]} ; do
   pos=$($component::ps1_position)
+
+
   if [ "${prompt_arr["$pos"]}" ] ; then
-    prefix="${prompt_arr["$pos"]} "
-  else
-    prefix=""
+    echo "Position $pos is occupied by ${prompt_arr["$pos"]}, move the $component element to another position"
+    exit 10
   fi
 
   color_args="$($component::ps1_color)"
@@ -32,12 +33,12 @@ for component in ${PROMPT_COMPONENTS[*]} ; do
     content="\$($cmd)"
   fi
 
-  prompt_arr[$pos]="$prefix$content"
+  prompt_arr[$pos]="$content"
 done
 
 cat<<-HERE > $INSTALL_DIR/var/ps1
 ps1() {
-  export PS1="${prompt_arr[*]}\n\$PROMPT_FOB "
+  export PS1="${prompt_arr[@]}\n\$PROMPT_FOB "
 }
 
 export PROMPT_COMMAND='ps1'
