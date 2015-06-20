@@ -14,6 +14,10 @@ declare -a prompt_arr
 for component in ${PROMPT_COMPONENTS[*]} ; do
   pos=$($component::ps1_position)
 
+  if [ -z "$pos" ] ; then
+    echo "Position undefined, ensure function $component::ps1_position is loaded"
+    exit 11
+  fi
 
   if [ "${prompt_arr["$pos"]}" ] ; then
     echo "Position $pos is occupied by ${prompt_arr["$pos"]}, move the $component element to another position"
