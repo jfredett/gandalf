@@ -15,6 +15,15 @@ ADD . /home/gandalf/.gandalf
 RUN chown -R gandalf /home/gandalf/.gandalf
 RUN chgrp -R gandalf /home/gandalf/.gandalf
 
+# install dependencies
+RUN apt-get install -y wget build-essential
+WORKDIR /tmp
+RUN wget -O chruby-0.3.9.tar.gz                                           \
+            https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz && \
+    tar -xzvf chruby-0.3.9.tar.gz                                      && \
+    cd chruby-0.3.9                                                    && \
+    make install
+
 # Switch to that user
 USER gandalf
 ENV USER gandalf
