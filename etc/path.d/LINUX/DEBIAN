@@ -3,3 +3,4 @@
 path::append /bin
 path::append /sbin
 path::append /usr/bin
+path::append /usr/local/share
