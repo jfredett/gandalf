@@ -1,4 +1,4 @@
-from debian:jessie
+FROM debian:jessie
 
 # Dependencies
 RUN apt-get update -y && \
