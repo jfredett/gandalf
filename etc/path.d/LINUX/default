@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-path::append $LD_LIBRARY_PATH
+if [ "$LD_LIBRARY_PATH" ] ; then
+  path::append $LD_LIBRARY_PATH
+fi
