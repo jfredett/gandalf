@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 # determines whether the given argument is a name that exists on the PATH,
-# or a file that exists at the fully specified location.
+# or a file that exists at the fully specified location, or is a function or
+# alias.
 exists() {
-  which "$1" &>/dev/null || [ -e "$1" ]
-}
+  which "$1" || [ -e "$1" ] || type -p "$1"
+} &>/dev/null
 
 require() {
   if exists $SCRIPT_HOME/$1 ; then
