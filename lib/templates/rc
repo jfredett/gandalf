@@ -5,3 +5,5 @@ source $SCRIPT_HOME/lib/core
 require lib/info
 
 require var/env_loader
+
+set -o vi
