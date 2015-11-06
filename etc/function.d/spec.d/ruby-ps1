@@ -10,4 +10,11 @@ if exists chruby ; then
     fi
   }
   ruby-ps1::ps1_cacheable() { false ; }
+else
+  ruby-ps1::ps1_color()     { echo ; }
+  ruby-ps1::ps1_position()  { echo 11 ; } # far left
+  ruby-ps1::ps1_content()   {
+    echo system | color -c red
+  }
+  ruby-ps1::ps1_cacheable() { false ; }
 fi
