@@ -6,3 +6,4 @@ export SHELL=/usr/local/bin/bash
 if [ -d "$HOME/oracle" ] ; then
   export LD_LIBRARY_PATH="$HOME/oracle/instantclient_11_2/"
 fi
+export VIM_PATH="$HOME/.nvim"

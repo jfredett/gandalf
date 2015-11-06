@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 export DEFAULT_VIMSERVER='vim_server'
-export VIM_PATH="$HOME/.vim"
+export VIM_PATH="$XDG_CONFIG_HOME/nvim"
