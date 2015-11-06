@@ -1,7 +1,6 @@
 [user]
 	name = Joe Fredette
 	email = jfredett@gmail.com
-  signingkey = EEE8D41E
 
 [color]
   diff = auto
@@ -10,10 +9,10 @@
   interactive = auto
 
 [alias]
-  st = status -s
-  ci = commit -S
-  ca = commit -Sa
-  merge = merge -S
+  st = status
+  ci = commit
+  ca = commit a
+  merge = merge
   co = checkout
   w = whatchanged
   pm = push -u origin master
@@ -23,12 +22,7 @@
   abort = rebase --abort
   skip = rebase --skip
   gr="log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset) - %C(blue)Sig:%G?' --all"
-  patch= commit -S --amend --no-edit
-[commit]
-  gpgsign=true
-
-[core]
-  excludesfile = /Users/jfredett/.gitignore_global
+  patch= commit --amend --no-edit
 
 [heroku]
   account = personal
@@ -39,7 +33,8 @@
 [rerere]
   enabled = true
 
-[include]
-  path = ~/.bash/github_gitconfig
 [diff]
-	algorithm = patience
+  algorithm = patience
+
+[hub]
+	protocol = git
