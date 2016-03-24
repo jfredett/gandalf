@@ -1,3 +1,7 @@
 if [ -e /usr/local/share/chruby/chruby.sh ] ; then
   source /usr/local/share/chruby/chruby.sh
 fi
+
+if [ -e /usr/share/chruby/chruby.sh ] ; then
+  source /usr/share/chruby/chruby.sh
+fi
