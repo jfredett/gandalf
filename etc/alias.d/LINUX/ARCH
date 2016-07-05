@@ -6,10 +6,12 @@ if exists xclip ; then
 fi
 
 # bake in sudo for aura/pacman depending on whats installed
+alias pacman="sudo pacman --noconfirm"
+
 if exists aura ; then
   alias pacman="sudo aura --noconfirm"
-else
-  alias pacman="sudo pacman --noconfirm"
+elif exists yaourt ; then
+  alias pacman="sudo yaourt --noconfirm"
 fi
 
 # set up pbcopy/pbpaste for an X environment
