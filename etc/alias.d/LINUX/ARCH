@@ -11,7 +11,7 @@ alias pacman="sudo pacman --noconfirm"
 if exists aura ; then
   alias pacman="sudo aura --noconfirm"
 elif exists yaourt ; then
-  alias pacman="sudo yaourt --noconfirm"
+  alias pacman="yaourt --noconfirm"
 fi
 
 # set up pbcopy/pbpaste for an X environment
