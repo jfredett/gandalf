@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
+path::prepend /usr/local/bin
+
 path::append /usr/local/opt/coreutils/libexec/gnubin
+path::append /usr/local/sbin
+path::append /sbin
