@@ -3,4 +3,4 @@ hostname-ps1::ps1_position()  { echo 1 ; }
 hostname-ps1::ps1_content()   {
   echo $HOSTNAME
 }
-hostname-ps1::ps1_cacheable() { true ; }
+hostname-ps1::ps1_cacheable() { false ; }

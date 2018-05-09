@@ -32,6 +32,7 @@ for component in ${PROMPT_COMPONENTS[*]} ; do
   fi
 
   if $component::ps1_cacheable ; then
+    ## FIXME: This appears to result in things not getting colored/parenwrapped
     content="$($cmd)"
   else
     content="\$($cmd)"
