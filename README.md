@@ -7,7 +7,7 @@ startup performance and consistency across machines. It is, I think, therefore
 well worth driving into a new system with a more thoughtful, designed approach.
 
 [1] so named because of an old nickname ('bash-wizard') I acquired for actually
-knowing how to write shell,
+knowing how to write shell.
 
 ## Usage
 
