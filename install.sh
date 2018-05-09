@@ -33,7 +33,7 @@ fail_unless_exists git
 
 ## Collect information
 
-[ -z $INSTALL_DIR ] && INSTALL_DIR="/home/$USER/.gandalf"
+[ -z $INSTALL_DIR ] && INSTALL_DIR="$HOME/.gandalf"
 
 ## Relocate to installed directory
 cd $INSTALL_DIR
