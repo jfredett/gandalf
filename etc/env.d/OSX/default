@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-export HOMEBREW_GITHUB_API_TOKEN=`cat $SCRIPT_HOME/etc/secret.d/homebrew-git-token`
+if [ -e $SCRIPT_HOME/etc/secret.d/homebrew-git-token ] ; then
+  export HOMEBREW_GITHUB_API_TOKEN=`cat $SCRIPT_HOME/etc/secret.d/homebrew-git-token`
+fi
+
 export SHELL=/usr/local/bin/bash
 
 if [ -d "$HOME/oracle" ] ; then
