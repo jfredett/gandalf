@@ -10,3 +10,5 @@ alias psf="ps aux | grep"
 alias reload="source $SCRIPT_HOME/lib/templates/rc ; cd ."
 alias edit-aliases="$EDITOR $HOME/.bash/aliases && reload"
 alias edit-functions="$EDITOR $HOME/.bash/functions && reload"
+
+alias rg='rg --no-ignore'
