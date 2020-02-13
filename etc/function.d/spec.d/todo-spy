@@ -23,8 +23,8 @@ todo-spy::ps1_content() {
   todo-spy check_deps || return
 
   local todo_ps1=$(todo-spy::_make_entry green T todo_count)
-  local fixme_ps1=$(todo-spy::_make_entry red F fixme_count)
-  local other_ps1=$(todo-spy::_make_entry yellow O other_count)
+  local fixme_ps1=$(todo-spy::_make_entry yellow F fixme_count)
+  local other_ps1=$(todo-spy::_make_entry red B other_count)
 
 
   echo -ne \
