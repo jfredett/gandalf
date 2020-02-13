@@ -24,6 +24,7 @@ function set_color() {
   esac
 }
 
+# TODO: This is just crap, wtf were you thinking, past me from 2015?
 function squish_spaces() {
   echo "$(echo "$1" | sed -nE 's/\ +/ /pg')"
 }
