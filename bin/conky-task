@@ -1,0 +1,10 @@
+# This is time relative UTC+0
+TIME_SINCE_EPOCH=$(date +%s);
+
+CURRENT_HOUR_UTC=$((((TIME_SINCE_EPOCH % (24*3600)) / 3600)))
+
+if [[ ${CURRENT_HOUR_UTC} -gt 21 ]] || [[ ${CURRENT_HOUR_UTC} -lt "9" ]] ; then
+  task next-home | ansito -
+else
+  task next-work | ansito -
+fi
