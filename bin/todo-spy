@@ -8,13 +8,29 @@ todo-spy::check_deps() {
   exists rg
 }
 
+todo-spy::_find_item() {
+  rg "${1}"
+}
+
 # Counts number of occurences of $1 in current directory
 todo-spy::_count_item() {
-  rg "${1}" | wc -l
+  todo-spy::_find_item "${1}" | wc -l
 }
 
 todo-spy::help() {
   echo "NYI"
+}
+
+todo-spy::todo_find() {
+  todo-spy::_find_item "TODO:"
+}
+
+todo-spy::fixme_find() {
+  todo-spy::_find_item "FIXME:"
+}
+
+todo-spy::other_find() {
+  todo-spy::_find_item "(XXX|BUG):"
 }
 
 todo-spy::todo_count() {
