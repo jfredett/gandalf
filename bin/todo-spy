@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+source $SCRIPT_HOME/lib/core
+
+# ensures that the script can run at all, i.e., are all necessary tools
+# available, etc.
+todo-spy::check_deps() {
+  exists rg
+}
+
+# Counts number of occurences of $1 in current directory
+todo-spy::_count_item() {
+  rg "${1}" | wc -l
+}
+
+todo-spy::help() {
+  echo "NYI"
+}
+
+todo-spy::todo_count() {
+  todo-spy::_count_item "TODO:"
+}
+
+todo-spy::fixme_count() {
+  todo-spy::_count_item "FIXME:"
+}
+
+todo-spy::other_count() {
+  todo-spy::_count_item "(XXX|BUG):"
+}
+
+
+todo-spy::${1:-help}

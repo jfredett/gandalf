@@ -1,0 +1,5 @@
+if todo-spy check_deps ; then
+  alias todos=todo-spy::todo_count
+  alias fixmes=todo-spy::fixme_count
+  alias bugs=todo-spy::other_count
+fi

@@ -17,7 +17,7 @@ function ignore {
 
 
 git-spy::ps1_color() { echo ; }
-git-spy::ps1_position() { echo 10 ; }
+git-spy::ps1_position() { echo 9 ; }
 git-spy::ps1_content() {
   git-spy absent? && echo "none" | color -c red && return
   local branch="$(git-spy branch-name)"

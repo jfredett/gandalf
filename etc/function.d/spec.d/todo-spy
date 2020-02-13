@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# invoke like: todo-spy::_make_entry green T todo_count
+todo-spy::_make_entry() {
+  local color ; local entry ; local sigil
+
+  color=${1} ; shift
+  sigil="$(echo "${1}" | color -c "${color}" )" ; shift
+  entry="$(todo-spy "${1}")"
+
+  if [ -z "${entry}" ] ; then entry=0 ; fi
+
+  echo "${sigil}:$(echo "$entry" | color -c "$color" -B)"
+}
+
+todo-spy::ps1_color() { echo ; }
+todo-spy::ps1_position() { echo 10 ; }
+todo-spy::ps1_cacheable() { false ; }
+todo-spy::ps1_content() {
+  # don't do anything unless we're in a git repo
+  git-spy absent? && return
+  # if we don't meet our dependencies, do nothing
+  todo-spy check_deps || return
+
+  local todo_ps1=$(todo-spy::_make_entry green T todo_count)
+  local fixme_ps1=$(todo-spy::_make_entry red F fixme_count)
+  local other_ps1=$(todo-spy::_make_entry yellow O other_count)
+
+
+  echo -ne \
+    "${todo_ps1}|${fixme_ps1}|${other_ps1}"
+}
