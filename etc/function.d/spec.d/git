@@ -15,6 +15,11 @@ function ignore {
   return 0
 }
 
+function ci {
+  local branch=$(git branch --show-current)
+  git ci -m "[${branch}] \"${@}\""
+}
+
 
 git-spy::ps1_color() { echo ; }
 git-spy::ps1_position() { echo 9 ; }
